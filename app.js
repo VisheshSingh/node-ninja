@@ -12,4 +12,12 @@ app.get('/about', (req, res) => {
   res.sendFile('./views/about.html', { root: __dirname });
 });
 
+app.get('/about-us', (req, res) => {
+  res.redirect('/about');
+});
+
+app.use((req, res) => {
+  res.status(404).sendFile('./views/404.html', { root: __dirname });
+});
+
 app.listen(3000, () => console.log('Server running on port 3000...'));
