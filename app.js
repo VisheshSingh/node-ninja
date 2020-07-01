@@ -1,6 +1,10 @@
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
+
+// logger middleware
+app.use(morgan('dev'));
 
 // register view engine
 app.set('view engine', 'ejs');
