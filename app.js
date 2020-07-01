@@ -5,6 +5,8 @@ const app = express();
 
 // logger middleware
 app.use(morgan('dev'));
+// static middleware
+app.use(express.static('public'));
 
 // register view engine
 app.set('view engine', 'ejs');
