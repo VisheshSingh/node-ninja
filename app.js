@@ -17,6 +17,8 @@ mongoose
 
 // logger middleware
 app.use(morgan('dev'));
+// send form data by parsing request body
+app.use(express.urlencoded({ extended: true }));
 // static middleware
 app.use(express.static('public'));
 
@@ -55,6 +57,16 @@ app.get('/blogs', (req, res) => {
     .sort({ createdAt: -1 })
     .then((result) => res.render('index', { title: 'Home', blogs: result }))
     .catch((err) => console.log('Error fetching blogs', err));
+});
+
+app.post('/blogs', async (req, res) => {
+  const blog = new Blog(req.body);
+  try {
+    await blog.save();
+    res.redirect('/blogs');
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get('/about-us', (req, res) => {
